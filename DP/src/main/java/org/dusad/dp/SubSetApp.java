@@ -1,5 +1,7 @@
 package org.dusad.dp;
 
+import com.google.common.primitives.Ints;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +27,6 @@ class SubSetUtil {
             }
         }
         printMatrix(T, a, sum);
-
         deriveSubsetFromMatrix(T, a, sum);
     }
 
@@ -41,6 +42,7 @@ class SubSetUtil {
             }
         }
         Collections.reverse(subSet);
+        System.out.println("Set is:" + Ints.asList(a) + " Sum is : " + sum);
         System.out.print("SubSet is" + subSet);
     }
 
