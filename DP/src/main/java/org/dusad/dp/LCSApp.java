@@ -32,10 +32,10 @@ class LCSUtil {
             }
         }
 
-        deriveSubsequenceFromMatrix(T, a, b);
+        deriveSubsequentFromMatrix(T, a, b);
     }
 
-    private static void deriveSubsequenceFromMatrix(int[][] T, char[] a, char[] b) {
+    private static void deriveSubsequentFromMatrix(int[][] T, char[] a, char[] b) {
         printMatrix(T, a, b);
         List<Character> subSequence = new ArrayList<>();
         int i = a.length, j = b.length;
