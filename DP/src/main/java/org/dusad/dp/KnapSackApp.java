@@ -1,8 +1,8 @@
 package org.dusad.dp;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import lombok.EqualsAndHashCode;
+
+import java.util.*;
 
 import static java.lang.StrictMath.max;
 
@@ -12,6 +12,7 @@ public class KnapSackApp {
         int wt[] = {4, 2, 3, 5, 5, 6, 9, 7, 8, 10};
         int sackWeight = 30;
         KnapSackUtil.bottomUpDP(val, wt, sackWeight);
+        KnapSackUtil.topDownRecursive(val, wt, sackWeight);
 
     }
 }
@@ -67,4 +68,38 @@ class KnapSackUtil {
             System.out.println();
         }
     }
+
+    static void topDownRecursive(int[] val, int[] wt, int W) {
+        Map<Index, Integer> map = new HashMap<>();
+        System.out.println("Max Value: " + topDownRecursiveUtil(val, wt, W, val.length, 0, map));
+    }
+
+    private static int topDownRecursiveUtil(int[] val, int[] wt, int remainingWeight, int totalItems, int currentItem, Map<Index, Integer> map) {
+        if (currentItem >= totalItems || remainingWeight <= 0)
+            return 0;
+        Index key = new Index();
+        key.remainingItems = (totalItems - 1) - currentItem;
+        key.remainingWeight = remainingWeight;
+        if (map.containsKey(key))
+            return map.get(key);
+        int maxValue;
+        //if current item can't be selected
+        if (wt[currentItem] > remainingWeight)
+            maxValue = topDownRecursiveUtil(val, wt, remainingWeight, totalItems, currentItem + 1, map);
+        else {
+            //if current Item can be selected ,max of(selected/ not selected)
+            maxValue = Math.max(val[currentItem] + topDownRecursiveUtil(val, wt, remainingWeight - wt[currentItem], totalItems, currentItem + 1, map),
+                    topDownRecursiveUtil(val, wt, remainingWeight, totalItems, currentItem + 1, map)
+            );
+        }
+        map.put(key, maxValue);
+        return maxValue;
+    }
+
+}
+
+@EqualsAndHashCode
+class Index {
+    int remainingWeight;
+    int remainingItems;
 }

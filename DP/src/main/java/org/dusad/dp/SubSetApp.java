@@ -8,9 +8,11 @@ import java.util.List;
 
 public class SubSetApp {
     public static void main(String[] args) {
-        int a[] = {1, 3, 5, 5, 2, 1, 1, 6};
+        int a[] = {1, 3, 5, 1};
         int sum = 11;
         SubSetUtil.findSubset(a, sum);
+        SubSetUtil.findSubsetRec(a, sum);
+
 
     }
 }
@@ -62,6 +64,23 @@ class SubSetUtil {
             }
             System.out.println();
         }
+    }
+
+    public static void findSubsetRec(int[] a, int sum) {
+
+        System.out.println(findSubsetRecUtil(a, sum, 0, a.length));
+    }
+
+    private static boolean findSubsetRecUtil(int[] a, int remainingSum, int currentIndex, int totalItems) {
+        if (remainingSum == 0)
+            return true;
+        if (currentIndex >= totalItems)
+            return false;
+        if (a[currentIndex] > remainingSum)
+            return findSubsetRecUtil(a, remainingSum, currentIndex + 1, totalItems);
+        else
+            return findSubsetRecUtil(a, remainingSum - a[currentIndex], currentIndex + 1, totalItems) || findSubsetRecUtil(a, remainingSum, currentIndex + 1, totalItems);
+
     }
 }
 

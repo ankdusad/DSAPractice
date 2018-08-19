@@ -1,5 +1,7 @@
 package org.dusad.dp;
 
+import com.google.common.collect.Lists;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,6 +13,7 @@ public class LCSApp {
         String str1 = "ABCDGHLQR";
         String str2 = "AEDPHR";
         LCSUtil.longestCommonSubSequence(str1.toCharArray(), str2.toCharArray());
+        LCSUtil.lcsRecursive(str1.toCharArray(), str2.toCharArray());
     }
 }
 
@@ -68,4 +71,14 @@ class LCSUtil {
     }
 
 
+    public static void lcsRecursive(char[] a, char[] b) {
+        List<Character> lcs = new ArrayList<>();
+        System.out.println("LCS rec:" + Lists.charactersOf(lcsRecursiveUtil(a, b, 0, 0)));
+    }
+
+    private static String lcsRecursiveUtil(char[] a, char[] b, int i, int j) {
+        if (i >= a.length || j >= b.length) return "";
+        if (a[i] == b[j]) return a[i] + lcsRecursiveUtil(a, b, i + 1, j + 1);
+        return (lcsRecursiveUtil(a, b, i, j + 1).length() > lcsRecursiveUtil(a, b, i + 1, j).length()) ? lcsRecursiveUtil(a, b, i, j + 1) : lcsRecursiveUtil(a, b, i + 1, j);
+    }
 }
