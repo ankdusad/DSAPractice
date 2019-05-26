@@ -67,7 +67,6 @@ class SubSetUtil {
     }
 
     public static void findSubsetRec(int[] a, int sum) {
-
         System.out.println(findSubsetRecUtil(a, sum, 0, a.length));
     }
 
