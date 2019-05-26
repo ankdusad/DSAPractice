@@ -8,11 +8,9 @@ public class GDriver {
         graph.addEdge(1, 3);
         graph.addEdge(1, 2);
         graph.addEdge(1, 11);
-        graph.addEdge(3, 4);
-        graph.addEdge(5, 6);
-        graph.addEdge(6, 3);
-        graph.addEdge(3, 8);
-        graph.addEdge(8, 11);
+        graph.addEdge(2, 4);
+        graph.addEdge(4, 6);
+        graph.addEdge(6, 8);
 
         System.out.println(graph.dfs(1));
         System.out.println(graph.dfsRec(1));

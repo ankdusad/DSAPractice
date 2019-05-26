@@ -28,4 +28,7 @@ public class Vertex<T> {
         return adjacentVertices.size();
     }
 
+    public String toString() {
+        return this.getId() + " ";
+    }
 }

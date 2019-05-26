@@ -3,7 +3,6 @@ package graph2.structure;
 import lombok.Data;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Data
 public class Graph<T> {
@@ -37,7 +36,7 @@ public class Graph<T> {
 
     }
 
-    public Set<Long> dfs(long id) {
+    public Set<Vertex<T>> dfs(long id) {
         Set<Vertex<T>> visited = new LinkedHashSet<>();
         Stack<Vertex<T>> stack = new Stack<>();
         stack.push(vertices.get(id));
@@ -48,26 +47,25 @@ public class Graph<T> {
                 vertex.getAdjacentVertices().forEach(stack::push);
             }
         }
-        return visited.stream().map(Vertex::getId).collect(Collectors.toSet());
+        return visited;
     }
 
-    public Set<Long> dfsRec(long id) {
+    public Set<Vertex<T>> dfsRec(long id) {
         Set<Vertex<T>> visited = new LinkedHashSet<>();
-        return dfsRecUtil(vertices.get(id), visited).stream().map(Vertex::getId).collect(Collectors.toSet());
+        return dfsRecUtil(vertices.get(id), visited);
     }
 
     private Set<Vertex<T>> dfsRecUtil(Vertex<T> vertex, Set<Vertex<T>> visited) {
         visited.add(vertex);
         vertex.getAdjacentVertices().forEach(v -> {
             if (!visited.contains(v)) {
-                visited.add(v);
                 dfsRecUtil(v, visited);
             }
         });
         return visited;
     }
 
-    public Set<Long> bfs(long id) {
+    public Set<Vertex<T>> bfs(long id) {
         Set<Vertex<T>> visited = new LinkedHashSet<>();
         Queue<Vertex<T>> queue = new LinkedList<>();
         Vertex<T> vertex = vertices.get(id);
@@ -82,8 +80,7 @@ public class Graph<T> {
                 });
             }
         }
-
-        return visited.stream().map(Vertex::getId).collect(Collectors.toSet());
+        return visited;
     }
 
 
